@@ -1,6 +1,9 @@
 # Advent-Of-Code
 🎄 In this repository, I solve Advent of Code 2020 in Python. Learning to parse files.
 
+###
+Learning Parsy.
+
 ### Exercises TODO:
 01: X-X
 02: X-X
