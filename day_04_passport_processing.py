@@ -8,7 +8,7 @@ Advent of Code 2020: Day 4. Passport Processing
 
 # -- Data import
 
-import os
+import parsy
 
 fp = open('day_04_input.txt', 'r')
 
@@ -53,3 +53,15 @@ for i in range(len(reg)):
 
 print("Hay " + str(valido) + " pasaportes válidos y " + str(fallo) + " pasaportes inválidos.")
 
+# -- PARTE 2
+fp = open('day_04_input.txt', 'r')
+
+text = []
+line = fp.readline()
+
+while line:
+    text.append(line.strip())
+    line = fp.readline()
+
+print("Datas are imported successfully!\n")
+print(text)

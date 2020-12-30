@@ -23,6 +23,7 @@ print("Datas are imported successfully!\n")
 
 # text = ["abc", "", "a", "b", "c", "", "ab", "ac", "", "a", "a", "a", "a", "", "b"]
 # text = ["meqnof", "vxwhzpmqo", "jno", "bkoliycr", "", "u", "u"]
+# text = ["qwmfrncxb", "drjqglsakpwtbi"]
 # print(text)
 
 # -- PART 1
@@ -45,24 +46,30 @@ print(str(sum(num_letters_by_group)) + "\n")
 
 # -- PART 2
 cnt = 0
-uni_letters, uni_letters_by_group = [], []
+uni_letters, uni_letters_by_group = "", []
 
 for i in text:
     if ((len(i) > 0) and (cnt == 0)):
         for letter in i:
-            uni_letters.append(letter)  
+            if letter not in uni_letters:
+                uni_letters += letter
+        # print("Unique letters are: " + uni_letters)      
         cnt += 1
     elif ((len(i) > 0) and (cnt != 0)):
+        print("Analyzing: " + i)
         for letter in uni_letters:
-            if (letter not in i):
-                uni_letters.remove(letter)
-        cnt += 1
+            if letter not in i:
+                uni_letters = uni_letters.replace(letter, "")
+                # print("Removing " + str(letter))
+                # print(uni_letters)
     else:
         uni_letters_by_group.append(len(uni_letters))
-        uni_letters = []
+        uni_letters = ""
         cnt = 0
+    print(uni_letters)
 
 # Last line is not empty, adding last group
+print("Final result is: " + uni_letters)
 uni_letters_by_group.append(len(uni_letters))
 
 print(uni_letters_by_group)
