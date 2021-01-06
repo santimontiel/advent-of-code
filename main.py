@@ -32,3 +32,5 @@ if __name__ == "__main__":
     c = Console()
     c.print(table)
     c.print("   You collected a total of 11/50 stars! :star:")
+
+    # Hello!
