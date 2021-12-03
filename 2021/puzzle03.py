@@ -3,7 +3,6 @@ __author__: Santiago Montiel Marín
 """
 
 import doctest
-from os import remove
 from typing import List
 
 def parse_text(raw_puzzle: str) -> List[int]:
@@ -39,7 +38,7 @@ def part1(puzzle: List[str]) -> int:
         for (idx, char) in enumerate(line):
             counter[idx] += 1 if char == "1" else 0
     elem = len(puzzle)
-    mcv = ["1" if counter[idx] > int(elem/2) else 0 for (idx, el) in enumerate(counter)]
+    mcv = ["1" if counter[idx] > int(elem/2) else "0" for (idx, el) in enumerate(counter)]
     epsilon_bin, gamma_bin = "", ""
     for n in mcv:
         if n == "1": epsilon_bin, gamma_bin = epsilon_bin + "1", gamma_bin + "0"
