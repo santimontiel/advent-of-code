@@ -7,9 +7,6 @@ Advent of Code 2020: Day 4. Passport Processing
 # -*- coding: utf-8 -*-
 
 # -- Data import
-
-import parsy
-
 fp = open('day_04_input.txt', 'r')
 
 # Parseo el fichero, pongo todos los datos en una única línea.
