@@ -1,7 +1,6 @@
 # Read puzzle.
 with open("../data/day_01.txt", "r") as file:
     content = list(map(lambda x: x.rstrip(), file.readlines()))
-
 print(content)
 
 # Part 1.
@@ -15,6 +14,6 @@ for line in content:
 print(max(elves))
 
 # Part 2.
-sorted_elves = sorted(elves)
-print(sum(sorted_elves[-3:]))
+sorted_elves = sorted(elves, reverse=True)
+print(sum(sorted_elves[:3]))
 
