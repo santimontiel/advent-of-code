@@ -7,64 +7,38 @@ with open("../data/day_09_test.txt", "r") as file:
 
 # Part 1.
 def move_head(d, xh, yh):
-    if d == "R":
-        xh += 1
-    if d == "L":
-        xh -= 1
-    if d == "U":
-        yh += 1
-    if d == "D":
-        yh -= 1
+    if d == "R": xh += 1
+    if d == "L": xh -= 1
+    if d == "U": yh += 1
+    if d == "D": yh -= 1
     return xh, yh
 
-def move_tail(d, xt, yt, xh, yh):
-    dx = dy = 0
-    distance = math.sqrt((xh-xt)**2 + (yh-yt)**2)
-    if distance >= 1.5:
-        dx = math.fabs(xh - xt)
-        dy = math.fabs(yh - yt)
-        if d == "R":
-            xt += dx - 1
-            yt = yh
-        if d == "L":
-            xt -= dx - 1
-            yt = yh
-        if d == "U":
-            xt = xh
-            yt += dy - 1
-        if d == "D":
-            xt = xh
-            yt -= dy - 1
+def move_tail(xt, yt, xh, yh):
+    dx = xh-xt
+    dy = yh-yt
+    if dx**2 + dy**2 > 2:
+        if dx != 0:
+            xt += 1 if dx > 0 else -1
+        if dy != 0:
+            yt += 1 if dy > 0 else -1
     return xt, yt
 
-visited = set()
 xh = yh = xt = yt = 0
+vis = {(0,0)}
 for line in puzzle:
-    direction, t = line[0], line[1]
-    for _ in range(t):
-        xh, yh = move_head(direction, xh, yh)
-        xt, yt = move_tail(direction, xt, yt, xh, yh)
-        visited.add((xt, yt))
-print("PRIMERA PARTE:", len(visited), "\n")
+    for n in range(int(line[1])):
+        xh, yh = move_head(line[0], xh, yh)
+        xt, yt = move_tail(xt, yt, xh, yh)
+        vis.add((xt, yt))
+print(len(vis))
 
 # Part 2.
-# t_prev = 0
-# positions = [[0,0] for _ in range(10)]
-# directions = [puzzle[0][0] for _ in range(10)]
-# print("****** INIT")
-# print(positions)
-# print(directions)
-# for line in puzzle:
-#     direction, t = line[0], line[1]
-#     print("******", direction, t)
-#     for x in range(t):
-#         for i in range(9):
-#             positions[i][0], positions[i][1] = move_head(directions[i], positions[i][0], positions[i][1])
-#             positions[i][0], positions[i][1] = move_tail(directions[i], positions[i][0], positions[i][1], positions[i-1][0], positions[i-1][1])
-#             if i == 9:
-#                 visited.add((positions[i+1][0], positions[i+1][1]))
-#         print(positions)
-
-#     print(directions)
-#     t_prev = t
-# print(len(visited))
+poses = [[0,0] for _ in range(10)]
+vis = set()
+for line in puzzle:
+    for n in range(line[1]):
+        poses[0][0], poses[0][1] = move_head(line[0], poses[0][0], poses[0][1])
+        for i in range(1, 10):
+            poses[i][0], poses[i][1] = move_tail(poses[i][0], poses[i][1], poses[i-1][0], poses[i-1][1])
+        vis.add((poses[-1][0], poses[-1][1]))
+print(len(vis))
