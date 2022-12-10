@@ -1,5 +1,3 @@
-import math
-
 # Read puzzle.
 with open("../data/day_09_test.txt", "r") as file:
     puzzle = list(map(lambda x: x.rstrip().split(" "), file.readlines()))
@@ -24,7 +22,7 @@ def move_tail(xt, yt, xh, yh):
     return xt, yt
 
 xh = yh = xt = yt = 0
-vis = {(0,0)}
+vis = set()
 for line in puzzle:
     for n in range(int(line[1])):
         xh, yh = move_head(line[0], xh, yh)
