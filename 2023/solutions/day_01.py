@@ -81,16 +81,17 @@ def part_2(data: List[str]) -> int:
         "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9"
     }
     def get_digit(line: str) -> str:
+        new_line = ""
         for (i, c) in enumerate(line):
+
             for pattern in DIGITS.keys():
                 if line[i:].startswith(pattern):
                     if c.isdigit():
-                        print
-                        return int(c)
+                        new_line += c
                     elif pattern in DIGITS.keys():
-                        return int(DIGITS[pattern])
-        return ""
-    dig = [list(map(get_digit, line.split())) for line in data]
+                        new_line += DIGITS[pattern]
+        return new_line
+    dig = [list(map(get_digit, line.split()))[0] for line in data]
     return sum([int(line[0]) * 10 + int(line[-1]) * 1 for line in dig])
 
 
