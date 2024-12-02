@@ -2,8 +2,7 @@ from copy import deepcopy
 
 with open("day_02_input.txt") as f:
     data = f.read().splitlines()
-    data = [line.split() for line in data]
-    data = [[int(x) for x in line] for line in data]
+    data = [[int(x) for x in line.split()] for line in data]
 
 
 def is_safe(level_diffs):
