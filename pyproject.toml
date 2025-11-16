@@ -1,0 +1,14 @@
+[project]
+name = "advent-of-code"
+version = "0.1.0"
+authors = [
+  { name = "Santi Montiel-Marín" }
+]
+description = "🎄 My solutions to Advent of Code problems. By Santi Montiel-Marín"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "rich>=14.2.0",
+    "rootutils>=1.0.7",
+    "watchdog>=6.0.0",
+]
