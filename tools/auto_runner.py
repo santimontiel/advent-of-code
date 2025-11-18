@@ -13,34 +13,11 @@ from rich.rule import Rule
 import importlib
 
 import rootutils
-
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 
+from aoc.utils import resolve_paths, create_boilerplate, load_lines
+
 console = Console()
-
-
-def resolve_paths(year: int, day: int) -> dict[str, Path]:
-    return {
-        "problem": Path(f"aoc/solutions/{year}/day{day:02d}.py"),
-        "input": Path(f"data/{year}/day{day:02d}_input.txt"),
-        "sample": Path(f"data/{year}/day{day:02d}_sample.txt"),
-    }
-
-
-def create_boilerplate(year: int, day: int, paths: dict[str, Path]) -> None:
-    for p in paths.values():
-        p.parent.mkdir(parents=True, exist_ok=True)
-
-    boilerplate = (
-        f'"""Solution for Advent of Code {year} Day {day:02d}."""\n\n'
-        "def part1(input_data: list[str]) -> int:\n"
-        "    pass\n\n"
-        "def part2(input_data: list[str]) -> int:\n"
-        "    pass\n"
-    )
-    paths["problem"].write_text(boilerplate, encoding="utf-8")
-    paths["input"].touch()
-    paths["sample"].touch()
 
 
 class AoCAutoRunner(FileSystemEventHandler):
@@ -83,7 +60,7 @@ class AoCAutoRunner(FileSystemEventHandler):
             return
 
         input_path = self.paths["sample"] if self.sample else self.paths["input"]
-        input_data = input_path.read_text(encoding="utf-8").splitlines()
+        input_data = load_lines(input_path)
 
         if args.sample and not input_data:
             console.print(
@@ -94,7 +71,7 @@ class AoCAutoRunner(FileSystemEventHandler):
                 )
             )
             input_path = self.paths["input"]
-            input_data = input_path.read_text(encoding="utf-8").splitlines()
+            input_data = load_lines(input_path)
 
         start = time.perf_counter()
         try:
