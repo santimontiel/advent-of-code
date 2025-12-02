@@ -12,3 +12,13 @@ dependencies = [
     "rootutils>=1.0.7",
     "watchdog>=6.0.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.7",
+]
+
+
+[tool.ruff]
+line-length = 79
+
