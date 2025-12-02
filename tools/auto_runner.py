@@ -15,7 +15,12 @@ import importlib
 import rootutils
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 
-from aoc.utils import resolve_paths, create_boilerplate, load_lines
+from aoc.utils import (
+    infer_year_day,
+    resolve_paths,
+    create_boilerplate,
+    load_lines,
+)
 
 console = Console()
 
@@ -105,9 +110,11 @@ def watch(year: int, day: int, sample: bool):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Auto-run AoC solution on save.")
-    parser.add_argument("-y", "--year", type=int, required=True)
-    parser.add_argument("-d", "--day", type=int, required=True)
+    parser.add_argument("-y", "--year", type=int)
+    parser.add_argument("-d", "--day", type=int)
     parser.add_argument("-s", "--sample", action="store_true")
     args = parser.parse_args()
 
-    watch(args.year, args.day, args.sample)
+    year, day = infer_year_day(args.year, args.day)
+
+    watch(year, day, args.sample)

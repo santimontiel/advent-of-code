@@ -16,9 +16,9 @@ def create_boilerplate(year: int, day: int, paths: dict[str, Path]) -> None:
         p.parent.mkdir(parents=True, exist_ok=True)
 
     boilerplate = (
-        f'"""Solution for Advent of Code {year} Day {day:02d}."""\n\n'
+        f'"""Solution for Advent of Code {year} Day {day:02d}."""\n\n\n'
         "def part1(input_data: list[str]) -> int:\n"
-        "    pass\n\n"
+        "    pass\n\n\n"
         "def part2(input_data: list[str]) -> int:\n"
         "    pass\n"
     )
@@ -37,6 +37,10 @@ def infer_year_day(year: int | None, day: int | None) -> tuple[int, int]:
     if year is None and day is None:
         if now.month != 12:
             raise ValueError("Not December — specify --year and --day.")
+        elif now.day > 25 and now.year < 2025:
+            raise ValueError("Until 2025, Advent of Code only runs until Dec 25.")
+        elif now.day > 12 and now.year >= 2025:
+            raise ValueError("From 2025, Advent of Code only runs until Dec 12.")
         return now.year, now.day
 
     return year or now.year, day or now.day
