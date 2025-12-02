@@ -5,6 +5,9 @@ data/
 # UV
 uv.lock
 
+# Ruff
+.ruff-cache/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
