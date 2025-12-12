@@ -2,6 +2,7 @@
 from dataclasses import dataclass, asdict
 from typing import Optional
 
+
 @dataclass
 class Passport:
     byr: Optional[str] = None
